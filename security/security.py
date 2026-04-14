@@ -18,8 +18,8 @@ def criptografar_senha(senha: str)-> str:
 def verificar_senha(senha: str, senha_hash: str)->bool: 
     return password_hash.verify(senha, senha_hash)
 
-def criar_access_token(dados: dict):
-    to_encode = dados.copy()
+def criar_access_token(data: dict):
+    to_encode = data.copy()
     expires = datetime.now(timezone.utc) + timedelta(minutes=settings.access_token_expires_minutes)
     to_encode.update({'exp': expires})
 
@@ -31,9 +31,9 @@ def criar_access_token(dados: dict):
 
     return access_token
 
-def criar_refresh_token(dados:dict):
-    to_encode = dados.copy()
-    expires = datetime.now(timezone.now) + timedelta(days=settings.refresh_token_expires_days)
+def criar_refresh_token(data:dict):
+    to_encode = data.copy()
+    expires = datetime.now(timezone.utc) + timedelta(days=settings.refresh_token_expires_days)
     to_encode.update({'exp': expires})
 
     refresh_token = jwt.encode(
